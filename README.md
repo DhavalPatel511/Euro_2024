@@ -2,7 +2,7 @@
 
 An interactive web app built using **Streamlit** that explores historical data and performance analytics of UEFA Euro tournaments. The app allows fans, analysts, and enthusiasts to gain insights into teams, players, and match trends with rich visualizations and user-friendly filters.
 
-🔗 [Live App](https://dhavalpatel511-streamlit-app-euro-analysis-7clufb.streamlit.app/)
+🔗 [Live App](https://euro2024analysis.streamlit.app/)
 
 ---
 
@@ -12,8 +12,7 @@ An interactive web app built using **Streamlit** that explores historical data a
 - Build interactive dashboards to explore:
   - Team performance
   - Player statistics
-  - Match-level analysis
-- Allow comparisons across teams and time periods
+- Allow comparisons across teams
 - Practice and showcase end-to-end data analysis & visualization using Python
 
 ---
@@ -22,8 +21,7 @@ An interactive web app built using **Streamlit** that explores historical data a
 
 - **Team Dashboard**: View wins, losses, goals scored/conceded, and other metrics
 - **Player Stats**: Filter by team or position to see top goal scorers and assist leaders
-- **Match Analysis**: Explore individual match outcomes with visuals and stat summaries
-- **Interactive Filters**: Select tournaments, teams, and players to customize views
+- **Interactive Filters**: Select teams, and players to customize views
 - **Modern Charts**: Uses Plotly and Matplotlib for clean and responsive graphs
 
 ---
@@ -39,9 +37,6 @@ An interactive web app built using **Streamlit** that explores historical data a
 | GitHub       | Version control & collaboration       |
 
 ---
-
-## 📁 Project Structure
-
 
 ## ▶️ Getting Started Locally
    ```bash
