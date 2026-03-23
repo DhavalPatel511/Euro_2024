@@ -41,7 +41,7 @@ An interactive web app built using **Streamlit** that explores historical data a
 ## ▶️ Getting Started Locally
    ```bash
    git clone https://github.com/DhavalPatel511/Euro_2024.git
-   cd Streamlit_app
+   cd Euro_2024
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    pip install -r requirements.txt
