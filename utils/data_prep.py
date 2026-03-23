@@ -4,6 +4,7 @@ import streamlit as st # type: ignore
 import matplotlib.pyplot as plt # type: ignore
 import requests # type: ignore
 from io import BytesIO
+import numpy as np # type: ignore
 
 sb = Sbopen()
 competitions = sb.competition()
@@ -45,35 +46,42 @@ team_tournament = pd.DataFrame({
     "position": ["Goalkeeper", "Right Back","Right Center Back" , "Left Center Back", "Left Back", "Right Defensive Midfield", "Center Attacking Midfield", "Left Defensive Midfield", "Right Wing", "Center Forward","Left Wing"],
     "position_id": [1,2,3,5,6,9,19,11,22,23,24]
 })
-
-
 # Team logos/flags
 team_logos = {
-    "England": "https://raw.githubusercontent.com/DhavalPatel511/Streamlit_app/main/flags/England.png",
-    "France": "https://raw.githubusercontent.com/DhavalPatel511/Streamlit_app/main/flags/France.png",
-    "Germany": "https://raw.githubusercontent.com/DhavalPatel511/Streamlit_app/main/flags/Germany.png",
-    "Spain": "https://raw.githubusercontent.com/DhavalPatel511/Streamlit_app/main/flags/Spain.png",
-    "Switzerland": "https://raw.githubusercontent.com/DhavalPatel511/Streamlit_app/main/flags/Switzerland.png"
+    "England": "https://raw.githubusercontent.com/DhavalPatel511/Euro_2024/main/flags/England.png",
+    "France": "https://raw.githubusercontent.com/DhavalPatel511/Euro_2024/main/flags/France.png",
+    "Germany": "https://raw.githubusercontent.com/DhavalPatel511/Euro_2024/main/flags/Germany.png",
+    "Spain": "https://raw.githubusercontent.com/DhavalPatel511/Euro_2024/main/flags/Spain.png",
+    "Switzerland": "https://raw.githubusercontent.com/DhavalPatel511/Euro_2024/main/flags/Switzerland.png"
 }
+
+def create_placeholder_image():
+    """Create a gray placeholder for missing flags"""
+    img = np.ones((100, 100, 3)) * 0.8
+    return img
 
 @st.cache_data
 def load_flag_images(df, logo_dict):
-    """Load and cache team flags from GitHub URLs"""
     flag_images = []
+    placeholder = create_placeholder_image()
+    
     for _, row in df.iterrows():
         team = row['team']
         img_url = logo_dict.get(team, None)
         
         if img_url:
             try:
-                response = requests.get(img_url)
+                response = requests.get(img_url, timeout=5)
+                response.raise_for_status()
                 img = plt.imread(BytesIO(response.content))
-            except:
-                img = None  # Instead of a broken placeholder
+                if hasattr(img, 'shape') and len(img.shape) >= 2:
+                    flag_images.append(img)
+                else:
+                    flag_images.append(placeholder)  # Use placeholder instead of None
+            except Exception as e:
+                flag_images.append(placeholder)  # Use placeholder on error
         else:
-            img = None  # No logo available
-
-        flag_images.append(img)
+            flag_images.append(placeholder)
     
     return flag_images
 
@@ -83,7 +91,7 @@ def team_of_the_tournament():
     formation = '4-2-1-3'
     # Create pitch
     pitch = VerticalPitch(goal_type='box', pitch_color='grass', line_color='white',stripe = True)
-    fig, ax = pitch.draw(figsize=(6,8))
+    fig, ax = pitch.draw(figsize=(7,9))
 
     # Add title
     fig.suptitle('TEAM OF THE TOURNAMENT', fontsize=16, fontweight='bold')
@@ -99,7 +107,7 @@ def team_of_the_tournament():
 
     # Add player position markers
     ax_scatter = pitch.formation(formation, positions=team_tournament.position_id, kind='scatter',s=80,
-    color='gray', edgecolors='black',linewidth=1,ax=ax)
+    color='yellow', edgecolors='black',linewidth=1,ax=ax)
 
     return fig
 
