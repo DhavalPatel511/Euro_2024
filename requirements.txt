@@ -5,4 +5,4 @@ requests
 mplsoccer
 streamlit
 Pillow
-altair
+altair==5.2.0
