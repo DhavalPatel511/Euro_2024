@@ -1,5 +1,5 @@
 pandas
-numpy==1.26.3
+numpy
 matplotlib==3.8.2
 requests==2.31.0
 mplsoccer
