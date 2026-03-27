@@ -107,7 +107,7 @@ def team_of_the_tournament():
 
     # Add player position markers
     ax_scatter = pitch.formation(formation, positions=team_tournament.position_id, kind='scatter',s=120,
-    color='white', edgecolors='#1a78cf',linewidth=2.5,ax=ax,zorde=1)
+    color='white', edgecolors='#1a78cf',linewidth=2.5,ax=ax,zorder=1)
 
     plt.tight_layout()
     return fig

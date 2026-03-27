@@ -10,19 +10,19 @@ from utils.goalkeepingstats import extract_gk_stats
 
 # STANDARDIZED COLOR THEME
 THEME_COLORS = {
-    'primary': '#1a78cf',      # Main blue
-    'secondary': '#66d8ba',    # Teal/mint
-    'success': '#28a745',      # Green for positive outcomes
-    'warning': '#ffc107',      # Yellow for warnings/cautions
-    'danger': '#dc3545',       # Red for negative outcomes
-    'info': '#17a2b8',         # Light blue for information
-    'dark': '#343a40',         # Dark gray
-    'light': '#f8f9fa',        # Light gray
-    'background': '#000000',   # Black backgrounds
-    'text': '#ffffff',         # White text
-    'accent1': '#ff6b35',      # Orange accent
-    'accent2': '#4ecdc4',      # Light teal accent
-    'neutral': '#6c757d'       # Neutral gray
+    'primary': '#002147',      # Oxford blue
+    'secondary': '#C8102E',    # Cardinal red
+    'success': '#007A33',      # Celtic green
+    'warning': '#FDB913',      # Athletic gold
+    'danger': '#CE1141',       # Crimson
+    'info': '#006BB6',         # Lakers blue
+    'dark': '#13294B',         # Navy
+    'light': '#F4F4F4',        # Platinum
+    'background': '#ffffff',   # White
+    'text': '#1C1C1C',         # Jet black
+    'accent1': '#F26722',      # Orioles orange
+    'accent2': '#00B2A9',      # Tiffany blue
+    'neutral': '#8B8B8B'       # Gray
 }
 
 FIG_SIZES = {
@@ -271,9 +271,9 @@ def create_attacker_radar(df, player1_name, player2_name):
         kwargs_compare={'facecolor': THEME_COLORS['secondary'], 'alpha': 0.6})
     
     # Add title
-    axs['title'].text(0.01, 0.65, player1_name, fontsize=20, color=THEME_COLORS['primary'], 
+    axs['title'].text(0.01, 0.65, player1_name, fontsize=16, color=THEME_COLORS['primary'], 
                      ha='left', va='center')
-    axs['title'].text(0.99, 0.65, player2_name, fontsize=20, ha='right', va='center', 
+    axs['title'].text(0.99, 0.65, player2_name, fontsize=16, ha='right', va='center', 
                      color=THEME_COLORS['secondary'])
     
     # Draw parameter and range labels
@@ -485,9 +485,9 @@ def create_def_radar(df, player1_name, player2_name):
         kwargs_compare={'facecolor': THEME_COLORS['accent2'], 'alpha': 0.6})
     
     # Add title
-    axs['title'].text(0.01, 0.65, player1_name, fontsize=20, color=THEME_COLORS['info'], 
+    axs['title'].text(0.01, 0.65, player1_name, fontsize=16, color=THEME_COLORS['info'], 
                      ha='left', va='center')
-    axs['title'].text(0.99, 0.65, player2_name, fontsize=20, ha='right', va='center', 
+    axs['title'].text(0.99, 0.65, player2_name, fontsize=16, ha='right', va='center', 
                      color=THEME_COLORS['accent2'])
     
     # Draw parameter and range labels
@@ -544,8 +544,8 @@ def create_gk_radar(df, player1_name, player2_name):
                                                             kwargs_compare={'facecolor': THEME_COLORS['accent2'], 'alpha': 0.6})
     
     # Add title
-    axs['title'].text(0.01, 0.65, player1_name, fontsize=20, color=THEME_COLORS['info'], ha='left', va='center')
-    axs['title'].text(0.99, 0.65, player2_name, fontsize=20, ha='right', va='center', color=THEME_COLORS['accent2'])
+    axs['title'].text(0.01, 0.65, player1_name, fontsize=16, color=THEME_COLORS['info'], ha='left', va='center')
+    axs['title'].text(0.99, 0.65, player2_name, fontsize=16, ha='right', va='center', color=THEME_COLORS['accent2'])
     
     # Draw parameter and range labels
     radar.draw_range_labels(ax=axs['radar'], fontsize=8,color = THEME_COLORS['text'])
