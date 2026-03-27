@@ -252,14 +252,14 @@ st.markdown("""
         letter-spacing: -0.01em;
     }
     
-    /* ========== SELECTBOX STYLING (CRITICAL FIX) ========== */
+    /* ========== SELECTBOX STYLING  ========== */
     
     /* Label above selectbox */
     div[data-testid="stSelectbox"] label,
     .stSelectbox label {
         font-size: 1.0625rem !important;
         font-weight: 600 !important;
-        color: #18181b !important;
+        color: #3b82f6 !important;
         margin-bottom: 0.75rem !important;
         letter-spacing: 0.01em !important;
     }
@@ -284,7 +284,7 @@ st.markdown("""
     /* Text inside selectbox */
     div[data-testid="stSelectbox"] input,
     .stSelectbox input {
-        color: #18181b !important;
+        color: #3b82f6 !important;
         font-size: 1rem !important;
         font-weight: 500 !important;
     }
@@ -346,7 +346,7 @@ st.markdown("""
     
     /* ========== HEADERS STYLING ========== */
     h1 {
-        color: #18181b !important;
+        color: #3b82f6 !important;
         font-size: 2.5rem !important;
         font-weight: 800 !important;
         margin-bottom: 1.5rem !important;
@@ -354,7 +354,7 @@ st.markdown("""
     }
     
     h2 {
-        color: #18181b !important;
+        color: #3b82f6 !important;
         font-size: 2rem !important;
         font-weight: 700 !important;
         margin-top: 2rem !important;
@@ -735,7 +735,7 @@ tab1, tab2, tab3 = st.tabs(["⚽ Attacking Analysis", "🛡️ Defensive Analysi
 
 # ======================= ATTACKING ANALYSIS TAB =======================
 with tab1:
-    st.markdown("### Team Selection")
+    st.markdown('<h3 style="color: #3b82f6 !important;"> Team Selection</h3>', unsafe_allow_html=True)
     selected_team = st.selectbox(
         "Choose a team to analyze",
         euro_df['team_name'].sort_values().unique(),
@@ -791,7 +791,7 @@ with tab1:
 
     # Player comparison
     st.markdown("---")
-    st.markdown("### 🔄 Player Comparison")
+    st.markdown('<h3 style="color: #3b82f6 !important;">🔄 Player Comparison</h3>', unsafe_allow_html=True)
     
     col1, col2 = st.columns(2)
     with col1:
@@ -809,7 +809,7 @@ with tab1:
 
 # ======================= DEFENSIVE ANALYSIS TAB =======================
 with tab2:
-    st.markdown("### Team Selection")
+    st.markdown('<h3 style="color: #3b82f6 !important;"> Team Selection</h3>', unsafe_allow_html=True)
     selected_team = st.selectbox(
         "Choose a team to analyze",
         euro_df['team_name'].sort_values().unique(),
@@ -855,7 +855,7 @@ with tab2:
 
     # Player comparison
     st.markdown("---")
-    st.markdown("### 🔄 Player Comparison")
+    st.markdown('<h3 style="color: #3b82f6 !important;">🔄 Player Comparison</h3>', unsafe_allow_html=True)
     
     col1, col2 = st.columns(2)
     with col1:
@@ -884,7 +884,7 @@ with tab3:
     """, unsafe_allow_html=True)
 
     # Player comparison
-    st.markdown("### 🔄 Goalkeeper Comparison")
+    st.markdown('<h3 style="color: #3b82f6 !important;">🔄 Player Comparison</h3>', unsafe_allow_html=True)
     
     col1, col2 = st.columns(2)
     with col1:
