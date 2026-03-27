@@ -10,19 +10,19 @@ from utils.goalkeepingstats import extract_gk_stats
 
 # STANDARDIZED COLOR THEME
 THEME_COLORS = {
-    'primary': '#002147',      # Oxford blue
-    'secondary': '#C8102E',    # Cardinal red
-    'success': '#007A33',      # Celtic green
-    'warning': '#FDB913',      # Athletic gold
-    'danger': '#CE1141',       # Crimson
-    'info': '#006BB6',         # Lakers blue
-    'dark': '#13294B',         # Navy
-    'light': '#F4F4F4',        # Platinum
+    'primary': '#4f46e5',      # Indigo
+    'secondary': '#06b6d4',    # Cyan
+    'success': '#10b981',      # Emerald
+    'warning': '#f59e0b',      # Amber
+    'danger': '#ef4444',       # Rose
+    'info': '#3b82f6',         # Blue
+    'dark': '#18181b',         # Zinc dark
+    'light': '#fafafa',        # Zinc light
     'background': '#ffffff',   # White
-    'text': '#1C1C1C',         # Jet black
-    'accent1': '#F26722',      # Orioles orange
-    'accent2': '#00B2A9',      # Tiffany blue
-    'neutral': '#8B8B8B'       # Gray
+    'text': '#09090b',         # Almost black
+    'accent1': '#a855f7',      # Purple
+    'accent2': '#14b8a6',      # Teal
+    'neutral': '#71717a'       # Zinc gray
 }
 
 FIG_SIZES = {
