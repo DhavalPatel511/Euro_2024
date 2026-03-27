@@ -255,7 +255,7 @@ st.markdown("""
 st.markdown("""
 <div class="main-header">
     <h1 class="main-title">⚽ Euro 2024 Analytics Dashboard</h1>
-    <p class="main-subtitle">Comprehensive statistical analysis of Europe's premier football tournament</p>
+    <p class="main-subtitle">Comprehensive Tournament Analysis & Player Statistic</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -458,11 +458,10 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-tott = team_of_the_tournament()
-with st.container():
-    st.markdown('<div class="chart-container">', unsafe_allow_html=True)
-    st.pyplot(tott)
-    st.markdown('</div>', unsafe_allow_html=True)
+col1, col2, col3 = st.columns([0.5,2,0.5])
+with col2:
+    st.pyplot(team_of_the_tournament())
+
 
 # ======================= DETAILED ANALYSIS TABS =======================
 att_list, def_list, gk_list = preprocess_data(euro_df)

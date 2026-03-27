@@ -91,24 +91,25 @@ def team_of_the_tournament():
     formation = '4-2-1-3'
     # Create pitch
     pitch = VerticalPitch(goal_type='box', pitch_color='grass', line_color='white',stripe = True)
-    fig, ax = pitch.draw(figsize=(7,9))
+    fig, ax = pitch.draw(figsize=(9,11))
 
     # Add title
-    fig.suptitle('TEAM OF THE TOURNAMENT', fontsize=16, fontweight='bold')
+    fig.suptitle('TEAM OF THE TOURNAMENT', fontsize=20, fontweight='bold', y=0.975)
 
     # Add player names with line breaks for better display
     ax_text = pitch.formation(formation, positions=team_tournament.position_id, kind='text',
-    text=team_tournament.player_name.str.replace(' ', '\n'),fontweight = 'bold',color = 'Blue',
-    va='center', ha='center', fontsize=8, ax=ax,xoffset=-3.5)
+    text=team_tournament.player_name.str.replace(' ', '\n'),fontweight = 'bold',color = '#1a78cf',
+    va='center', ha='center', fontsize=10, ax=ax,xoffset=-3.5)
 
     # Add flag images with offset to the left
     ax_images = pitch.formation(formation, positions=team_tournament.position_id, 
-    kind='image',image=flag_images,height=3.5,ax=ax,xoffset=-7.5)
+    kind='image',image=flag_images,height=4,ax=ax,xoffset=-8)
 
     # Add player position markers
-    ax_scatter = pitch.formation(formation, positions=team_tournament.position_id, kind='scatter',s=80,
-    color='yellow', edgecolors='black',linewidth=1,ax=ax)
+    ax_scatter = pitch.formation(formation, positions=team_tournament.position_id, kind='scatter',s=120,
+    color='white', edgecolors='#1a78cf',linewidth=2.5,ax=ax,zorde=1)
 
+    plt.tight_layout()
     return fig
 
 @st.cache_data

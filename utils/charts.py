@@ -25,6 +25,15 @@ THEME_COLORS = {
     'neutral': '#6c757d'       # Neutral gray
 }
 
+FIG_SIZES = {
+    'pitch_vertical': (9, 6),
+    'pitch_full': (10,6),
+    'bar_chart': (10,6),
+    'pie_chart': (7,6),
+    'line_chart': (10,6),
+    'radar': 5
+}
+
 ####### Attack charts
 @st.cache_data
 def plot_shots(df, team_name):
@@ -39,7 +48,7 @@ def plot_shots(df, team_name):
 
     pitch = VerticalPitch(pitch_type='statsbomb', half=True, corner_arcs=True, spot_scale=0.01, 
                          pitch_color=THEME_COLORS['background'])
-    fig, ax = pitch.draw(figsize=(10, 8))
+    fig, ax = pitch.draw(figsize=FIG_SIZES['pitch_vertical'])
 
     ## Plot different shot types
     pitch.scatter(shots_on_target["x"], shots_on_target["y"], color=THEME_COLORS['success'], 
@@ -76,7 +85,7 @@ def passes_assisted_shot(df, team_name):
     # Setup the pitch
     pitch = VerticalPitch(pitch_type='statsbomb', pitch_color=THEME_COLORS['background'], 
                          line_color=THEME_COLORS['text'], half=True, corner_arcs=True)
-    fig, axs = pitch.draw(figsize=(8, 8))
+    fig, axs = pitch.draw(figsize=FIG_SIZES['pitch_vertical'])
 
     # Plot the completed passes
     pitch.lines(df_pass[mask_goal].x, df_pass[mask_goal].y, df_pass[mask_goal].end_x, df_pass[mask_goal].end_y,
@@ -110,7 +119,7 @@ def plot_xg_vs_goals(df, team_name):
     match_xg.rename(columns={'shot_statsbomb_xg': 'Total xG', 'outcome_name': 'Actual Goals'}, inplace=True)
 
     # Plot bar chart
-    fig, ax = plt.subplots(figsize=(8, 5))
+    fig, ax = plt.subplots(figsize=FIG_SIZES['bar_chart'])
     fig.patch.set_facecolor(THEME_COLORS['background'])
     ax.set_facecolor(THEME_COLORS['background'])
     
@@ -144,7 +153,7 @@ def plot_possession_share(df, team_name):
     colors = [THEME_COLORS['info'], THEME_COLORS['warning'], THEME_COLORS['danger']]
 
     # Plot pie chart
-    fig, ax = plt.subplots(figsize=(6, 6))
+    fig, ax = plt.subplots(figsize=FIG_SIZES['pie_chart'])
     fig.patch.set_facecolor(THEME_COLORS['background'])
     ax.pie(possession_counts, labels=labels, colors=colors, autopct='%1.1f%%', 
            startangle=90, textprops={'color': THEME_COLORS['text']})
@@ -166,7 +175,7 @@ def shot_accuracy(df, team_name):
     shot_accuracy = round((shots_on_target / total_shots) * 100, 2) if total_shots > 0 else 0
 
     # Pie Chart
-    fig, ax = plt.subplots(figsize=(6, 6))
+    fig, ax = plt.subplots(figsize=FIG_SIZES['pie_chart'])
     fig.patch.set_facecolor(THEME_COLORS['background'])
     ax.pie([shots_on_target, missed_shots], labels=["On Target", "Missed"], 
            autopct="%1.1f%%", colors=[THEME_COLORS['success'], THEME_COLORS['danger']],
@@ -194,7 +203,7 @@ def most_dangerous_attacking_players(df, team_name):
     goal_involvements = goal_involvements.sort_values("Total Involvements", ascending=False).head(5)
 
     # Plot figure
-    fig, ax = plt.subplots(figsize=(10, 8))
+    fig, ax = plt.subplots(figsize=FIG_SIZES['bar_chart'])
     fig.patch.set_facecolor(THEME_COLORS['background'])
     ax.set_facecolor(THEME_COLORS['background'])
     
@@ -245,10 +254,10 @@ def create_attacker_radar(df, player1_name, player2_name):
 
     # Create radar chart
     radar = Radar(params, [0] * len(params), [1] * len(params), 
-                 num_rings=4, ring_width=1, center_circle_radius=1)
+                 num_rings=5, ring_width=1, center_circle_radius=1)
     
     # Create figure and axis
-    fig, axs = grid(figheight=6, grid_height=0.915, title_height=0.06, title_space=0.01, 
+    fig, axs = grid(figheight=FIG_SIZES['radar'], grid_height=0.9,title_height=0.06, title_space=0.01, 
                    grid_key='radar', axis=False)
     fig.patch.set_facecolor(THEME_COLORS['background'])
     
@@ -302,7 +311,7 @@ def fouls_and_cards(df, team_name):
     foul_stats = foul_stats.sort_values(by=["Fouls", "total_yellow_cards", "total_red_cards"], ascending=False).head(5)
     colors = [THEME_COLORS['accent1'], THEME_COLORS['warning'], THEME_COLORS['danger']]
 
-    fig, ax = plt.subplots(figsize=(10, 8))
+    fig, ax = plt.subplots(figsize=FIG_SIZES['bar_chart'])
     fig.patch.set_facecolor(THEME_COLORS['background'])
     ax.set_facecolor(THEME_COLORS['background'])
     
@@ -335,7 +344,7 @@ def pressing_zones(df, team_name):
 
     pitch = Pitch(pitch_type='statsbomb', pitch_color=THEME_COLORS['background'], 
                  line_color=THEME_COLORS['text'])
-    fig, ax = pitch.draw(figsize=(10, 8))
+    fig, ax = pitch.draw(figsize=FIG_SIZES['pitch_vertical'])
 
     ax.scatter(high_press["x"], high_press["y"], color=THEME_COLORS['danger'], 
               alpha=0.7, label="High Press Recoveries", s=60)
@@ -368,7 +377,7 @@ def duels_won_percent(df, team_name):
     total_won = total_duels - total_lost
     duel_win_percent = round((total_won / total_duels) * 100, 2) if total_duels > 0 else 0
 
-    fig, ax = plt.subplots(figsize=(6, 6))
+    fig, ax = plt.subplots(figsize=FIG_SIZES['pie_chart'])
     fig.patch.set_facecolor(THEME_COLORS['background'])
     ax.pie([total_won, total_lost], labels=["Duels Won", "Duels Lost"], 
            autopct="%1.1f%%", colors=[THEME_COLORS['success'], THEME_COLORS['danger']],
@@ -408,7 +417,7 @@ def most_dangerous_defensive_players(df, team_name):
     defensive_involvements = defensive_involvements.sort_values("Defensive Contribution", ascending=False).head(5)
 
     # Plot figure
-    fig, ax = plt.subplots(figsize=(10, 8))
+    fig, ax = plt.subplots(figsize=FIG_SIZES['bar_chart'])
     fig.patch.set_facecolor(THEME_COLORS['background'])
     ax.set_facecolor(THEME_COLORS['background'])
     
@@ -459,10 +468,10 @@ def create_def_radar(df, player1_name, player2_name):
 
     # Create radar chart
     radar = Radar(params, [0] * len(params), [1] * len(params), 
-                 num_rings=4, ring_width=1, center_circle_radius=1)
+                 num_rings=5, ring_width=1, center_circle_radius=1)
     
     # Create figure and axis
-    fig, axs = grid(figheight=6, grid_height=0.915, title_height=0.06, title_space=0.01, 
+    fig, axs = grid(figheight=FIG_SIZES['radar'], grid_height=0.9, title_height=0.06, title_space=0.01, 
                    grid_key='radar', axis=False)
     fig.patch.set_facecolor(THEME_COLORS['background'])
     
@@ -521,10 +530,10 @@ def create_gk_radar(df, player1_name, player2_name):
 
     
     # Create radar chart
-    radar = Radar(params, [0] * len(params), [1]* len(params), num_rings=4, ring_width=1, center_circle_radius=1)
+    radar = Radar(params, [0] * len(params), [1]* len(params), num_rings=5, ring_width=1, center_circle_radius=1)
     
     # Create figure and axis
-    fig, axs = grid(figheight=6, grid_height=0.915, title_height=0.06, title_space=0.01, grid_key='radar', axis=False)
+    fig, axs = grid(figheight=FIG_SIZES['radar'],grid_height=0.9, title_height=0.08, title_space=0.02, grid_key='radar', axis=False)
     fig.patch.set_facecolor(THEME_COLORS['background'])
     
     # Plot radar
